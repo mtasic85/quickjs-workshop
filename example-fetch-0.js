@@ -1,6 +1,6 @@
 import fetch from './fetch.js';
 
-let id = Math.random() * 1000000 | 0;
+const id = Math.random() * 1000000 | 0;
 
 fetch('http://localhost:3000/posts', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ 'id': id, 'value': id + '0' }) })
   .then(res => res.json())

@@ -7,6 +7,10 @@ function fetchPolyfill(resource, init) {
     body: null,
   };
   
+  // method is always in upper case
+  init.method = init.method.toUpperCase();
+
+  // curl command
   let curlCmd = `curl -s -X${init.method.toUpperCase()} "${resource}"`;
 
   if (init.headers != null && Object.keys(init.headers).length > 0) {
@@ -23,15 +27,15 @@ function fetchPolyfill(resource, init) {
     curlCmd = `${curlCmd} -d '${body}'`
   }
 
+  // exec curl command in subprocess
   const spErr = {};
-  // console.log('curlCmd: ' + curlCmd);
   const sp = popen(curlCmd, 'r', spErr);
   const curlOutput = sp.readAsString();
   const responseUrl = resource;
-  const responseHeaders = {};
-  let responseOk = true;
-  let responseStatus = 200;
-
+  const responseHeaders = {}; // FIXME: to be implemented
+  let responseOk = true;      // FIXME: to be implemented
+  let responseStatus = 200;   // FIXME: to be implemented
+  
   const p = new Promise((resolve, reject) => {
     const response = {
       headers: responseHeaders,
